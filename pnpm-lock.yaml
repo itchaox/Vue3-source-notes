@@ -1,0 +1,13 @@
+lockfileVersion: '6.0'
+
+devDependencies:
+  cz-git:
+    specifier: ^1.7.0
+    version: 1.7.0
+
+packages:
+
+  /cz-git@1.7.0:
+    resolution: {integrity: sha512-A9ix8zJtRfuj7aXrlS2K6SqrFy/9VcoHOeZKEYM0qG4h++9p4/vkeEjHpwxHN0S2ARtbmlKypjrhVkFtFnBG1Q==}
+    engines: {node: '>=v12.20.0'}
+    dev: true

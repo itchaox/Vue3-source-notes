@@ -2,8 +2,8 @@
  * @Version    : v1.00
  * @Author     : wangchao
  * @Date       : 2023-07-12 15:54
- * @LastAuthor : wangchao
- * @LastTime   : 2023-07-12 16:31
+ * @LastAuthor : itchaox
+ * @LastTime   : 2023-07-13 23:29
  * @desc       : 渲染器实现
  */
 
@@ -12,6 +12,7 @@
  * 2. mount 函数
  */
 
+// generate vnode
 function h(tag, props, children) {
   return {
     tag,
@@ -20,18 +21,19 @@ function h(tag, props, children) {
   };
 }
 
+// mount vnode
 function mount(vnode, container) {
-  // 1. 准备 el 元素
-  const el = document.createElement(vnode.tag);
+  // 1. prepare element
+  const el = (vnode.el = document.createElement(vnode.tag));
 
-  // 2. props 处理
+  // 2. resolve props
   for (let key in vnode.props) {
     const value = vnode.props[key];
-    //TODO: 区分事件与属性
-    el.setAttributer(key, value);
+    //TODO: Distinguish between events and properties
+    el.setAttribute(key, value);
   }
 
-  // 3. children 处理
+  // 3. resolve children
   if (typeof vnode.children === 'string') {
     el.textContent = vnode.children;
   } else {
@@ -41,4 +43,37 @@ function mount(vnode, container) {
   }
 
   container.appendChild(el);
+}
+
+// compare vnode
+function patch(n1, n2) {
+  // 1. different tag
+  if (n1.tag !== n2.tag) {
+    const n1ElParent = n1.el.parentElement;
+    n1ElParent.removeChild(n1.el);
+    mount(n2, n1ElParent);
+  } else {
+    // 2. same tag
+    // 2.1 resolve props
+
+    const el = (n2.el = n1.el);
+    const oldProps = n1.props || {};
+    const newProps = n2.props || {};
+
+    // append newProps
+    for (let key in newProps) {
+      if (newProps[key] !== oldProps[key]) {
+        el.setAttribute(key, newProps[key]);
+      }
+    }
+
+    // remove oldPorps
+    for (let key in oldProps) {
+      if (!(key in newProps)) {
+        el.removeAttribute(key);
+      }
+    }
+
+    // 2.2 resolve children
+  }
 }

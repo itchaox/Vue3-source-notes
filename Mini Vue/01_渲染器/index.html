@@ -2,8 +2,8 @@
  * @Version    : v1.00
  * @Author     : wangchao
  * @Date       : 2023-07-12 15:53
- * @LastAuthor : wangchao
- * @LastTime   : 2023-07-12 16:32
+ * @LastAuthor : itchaox
+ * @LastTime   : 2023-07-13 23:29
  * @desc       : 
 -->
 <!DOCTYPE html>
@@ -21,8 +21,15 @@
 
     <script src="./renderer.js"></script>
     <script>
-      const vnode = h('div', null, [h('div', null, '一个div元素'), h('button', null, '点我一下')]);
-      mount(vnode, document.getElementById('app'));
+      const vnode1 = h('div', { class: 'a' }, [h('div', null, '一个div元素'), h('button', null, '点我一下')]);
+
+      mount(vnode1, document.getElementById('app'));
+
+      const vnode2 = h('div', { id: 'test' }, 'new vnode');
+
+      setTimeout(() => {
+        patch(vnode1, vnode2);
+      }, 3000);
     </script>
   </body>
 </html>

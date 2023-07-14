@@ -2,8 +2,8 @@
  * @Version    : v1.00
  * @Author     : wangchao
  * @Date       : 2023-07-12 15:54
- * @LastAuthor : itchaox
- * @LastTime   : 2023-07-13 23:29
+ * @LastAuthor : wangchao
+ * @LastTime   : 2023-07-14 10:56
  * @desc       : 渲染器实现
  */
 
@@ -75,5 +75,53 @@ function patch(n1, n2) {
     }
 
     // 2.2 resolve children
+
+    const oldChildren = n1.children || [];
+    const newChildren = n2.children || [];
+
+    if (typeof newChildren === 'string') {
+      // newChildren type is string
+      if (typeof oldChildren === 'string' && newChildren !== oldChildren) {
+        el.textContent = newChildren;
+      } else {
+        el.innerHTML = newChildren;
+      }
+    } else {
+      // newChildren type is Array
+
+      if (typeof oldChildren === 'string') {
+        el.innerHTML = '';
+        for (const item of newChildren) {
+          mount(item, el);
+        }
+      } else {
+        // oldChildren and newChildren type are Array
+
+        // oldChildren: [v1, v3, v5]
+        // newChildren: [v1, v3, v7, v8, v10]
+
+        //TODO: resolve key
+        const minLength = Math.min(oldChildren.length, newChildren.length);
+
+        // compare same length
+        for (let i = 0; i < minLength; i++) {
+          patch(oldChildren[i], newChildren[i]);
+        }
+
+        // append more children
+        if (newChildren.length > oldChildren.length) {
+          newChildren.slice(minLength).forEach((item) => {
+            mount(item, el);
+          });
+        }
+
+        // remove more children
+        if (newChildren.length < oldChildren.length) {
+          oldChildren.slice(minLength).forEach((item) => {
+            el.removeChild(item.el);
+          });
+        }
+      }
+    }
   }
 }

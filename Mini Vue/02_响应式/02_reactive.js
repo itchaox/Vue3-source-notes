@@ -3,7 +3,7 @@
  * @Author     : wangchao
  * @Date       : 2023-07-14 14:16
  * @LastAuthor : wangchao
- * @LastTime   : 2023-07-14 17:13
+ * @LastTime   : 2023-07-14 17:45
  * @desc       : 响应式基本处理
  */
 
@@ -49,29 +49,34 @@ function getDep(target, key) {
   return dep;
 }
 
-function reactive(raw) {
-  Object.keys(raw).forEach((key) => {
-    const dep = getDep(raw, key);
-    let value = raw[key];
+// Vue2 实现数据劫持
+// function reactive(raw) {
+//   Object.keys(raw).forEach((key) => {
+//     const dep = getDep(raw, key);
+//     let value = raw[key];
 
-    // Vue2 实现数据劫持
-    Object.defineProperty(raw, key, {
-      get() {
-        dep.depend();
-        return value;
-      },
+//     Object.defineProperty(raw, key, {
+//       get() {
+//         dep.depend();
+//         return value;
+//       },
 
-      set(newValue) {
-        value = newValue;
-        dep.notify();
-      },
-    });
+//       set(newValue) {
+//         if (value !== newValue) {
+//           value = newValue;
+//           dep.notify();
+//         }
+//       },
+//     });
 
-    // Vue3 实现数据劫持
-  });
+//     // Vue3 实现数据劫持
+//   });
 
-  return raw;
-}
+//   return raw;
+// }
+
+// Vue3 实现数据劫持
+function reactive() {}
 
 let activeEffect = null;
 function watchEffect(effect) {
@@ -82,6 +87,7 @@ function watchEffect(effect) {
 
 const info = reactive({
   age: 18,
+  name: '123',
 });
 
 watchEffect(function () {
@@ -95,3 +101,10 @@ watchEffect(function () {
 });
 
 info.age = 200;
+
+watchEffect(function () {
+  console.log(info.name);
+});
+
+info.name = 'ttt';
+info.age = 99;

@@ -3,7 +3,7 @@
  * @Author     : wangchao
  * @Date       : 2023-07-14 11:06
  * @LastAuthor : wangchao
- * @LastTime   : 2023-07-14 11:08
+ * @LastTime   : 2023-07-14 11:20
  * @desc       :
  */
 // cz.config.js
@@ -13,27 +13,20 @@ module.exports = {
   messages: {
     type: '选择你要提交的类型 :',
     scope: '选择一个提交范围（可选）:',
-    customScope: '请输入自定义的提交范围 :',
-    subject: '填写简短精炼的变更描述 :\n',
-    body: '填写更加详细的变更描述（可选）。使用 "|" 换行 :\n',
-    breaking: '列举非兼容性重大的变更（可选）。使用 "|" 换行 :\n',
-    footerPrefixesSelect: '选择关联issue前缀（可选）:',
-    customFooterPrefix: '输入自定义issue前缀 :',
-    footer: '列举关联issue (可选) 例如: #31, #I3244 :\n',
+    subject: '填写简短描述 :\n',
+    body: '填写详细描述（可选）。使用 "|" 换行 :\n',
     confirmCommit: '是否提交或修改commit ?',
   },
   types: [
-    { value: 'feat', name: 'feat:     新增功能 | A new feature' },
-    { value: 'fix', name: 'fix:      修复缺陷 | A bug fix' },
-    { value: 'docs', name: 'docs:     文档更新 | Documentation only changes' },
-    { value: 'style', name: 'style:    代码格式 | Changes that do not affect the meaning of the code' },
-    { value: 'refactor', name: 'refactor: 代码重构 | A code change that neither fixes a bug nor adds a feature' },
-    { value: 'perf', name: 'perf:     性能提升 | A code change that improves performance' },
-    { value: 'test', name: 'test:     测试相关 | Adding missing tests or correcting existing tests' },
-    { value: 'build', name: 'build:    构建相关 | Changes that affect the build system or external dependencies' },
-    { value: 'ci', name: 'ci:       持续集成 | Changes to our CI configuration files and scripts' },
-    { value: 'revert', name: 'revert:   回退代码 | Revert to a commit' },
-    { value: 'chore', name: 'chore:    其他修改 | Other changes that do not modify src or test files' },
+    { value: 'feat', name: 'feat:     新增功能' },
+    { value: 'fix', name: 'fix:      修复 bug' },
+    { value: 'docs', name: 'docs:     仅仅修改文档' },
+    { value: 'style', name: 'style:    仅仅修改了空格、格式缩进等，不改变代码逻辑' },
+    { value: 'refactor', name: 'refactor: 代码重构，没有增加新功能或者修复 bug' },
+    { value: 'chore', name: 'chore:    改变构建流程，比如增加依赖库、工具等' },
+    { value: 'perf', name: 'perf:     优化相关，比如提升性能、体验等' },
+    { value: 'test', name: 'test:     测试相关，增加测试用例等' },
+    { value: 'revert', name: 'revert:   回滚到上一个版本' },
   ],
   useEmoji: false,
   emojiAlign: 'center',
@@ -54,8 +47,8 @@ module.exports = {
   skipQuestions: [],
   issuePrefixes: [{ value: 'closed', name: 'closed:   ISSUES has been processed' }],
   customIssuePrefixAlign: 'top',
-  emptyIssuePrefixAlias: 'skip',
-  customIssuePrefixAlias: 'custom',
+  emptyIssuePrefixAlias: '跳过',
+  customIssuePrefixAlias: '自定义',
   allowCustomIssuePrefix: true,
   allowEmptyIssuePrefix: true,
   confirmColorize: true,

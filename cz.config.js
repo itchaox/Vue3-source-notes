@@ -3,7 +3,7 @@
  * @Author     : wangchao
  * @Date       : 2023-07-14 11:06
  * @LastAuthor : wangchao
- * @LastTime   : 2023-07-14 11:20
+ * @LastTime   : 2023-07-14 11:30
  * @desc       :
  */
 // cz.config.js
@@ -28,36 +28,15 @@ module.exports = {
     { value: 'test', name: 'test:     测试相关，增加测试用例等' },
     { value: 'revert', name: 'revert:   回滚到上一个版本' },
   ],
-  useEmoji: false,
-  emojiAlign: 'center',
-  useAI: false,
-  aiNumber: 1,
-  themeColorCode: '',
-  scopes: [],
   allowCustomScopes: true,
   allowEmptyScopes: true,
-  customScopesAlign: 'bottom',
-  customScopesAlias: 'custom',
-  emptyScopesAlias: 'empty',
-  upperCaseSubject: false,
-  markBreakingChangeMode: false,
-  allowBreakingChanges: ['feat', 'fix'],
+  customScopesAlias: '自定义',
+  emptyScopesAlias: '空',
   breaklineNumber: 100,
   breaklineChar: '|',
-  skipQuestions: [],
-  issuePrefixes: [{ value: 'closed', name: 'closed:   ISSUES has been processed' }],
-  customIssuePrefixAlign: 'top',
-  emptyIssuePrefixAlias: '跳过',
-  customIssuePrefixAlias: '自定义',
-  allowCustomIssuePrefix: true,
-  allowEmptyIssuePrefix: true,
   confirmColorize: true,
   maxHeaderLength: Infinity,
   maxSubjectLength: Infinity,
   minSubjectLength: 0,
-  scopeOverrides: undefined,
-  defaultBody: '',
-  defaultIssues: '',
-  defaultScope: '',
-  defaultSubject: '',
+  defaultType: 'feat',
 };

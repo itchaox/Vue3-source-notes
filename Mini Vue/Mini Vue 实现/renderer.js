@@ -3,7 +3,7 @@
  * @Author     : wangchao
  * @Date       : 2023-07-12 15:54
  * @LastAuthor : itchaox
- * @LastTime   : 2023-07-15 13:41
+ * @LastTime   : 2023-07-15 14:31
  * @desc       : 渲染器实现
  */
 
@@ -30,12 +30,17 @@ function mount(vnode, container) {
   for (let key in vnode.props) {
     const value = vnode.props[key];
     //TODO: Distinguish between events and properties
-    el.setAttribute(key, value);
+    if (key.startsWith('on')) {
+      el.addEventListener(key.slice(2).toLowerCase(), value);
+    } else {
+      el.setAttribute(key, value);
+    }
   }
 
   // 3. resolve children
   if (typeof vnode.children === 'string') {
     el.textContent = vnode.children;
+    debugger;
   } else {
     for (let child of vnode.children) {
       mount(child, el);
@@ -47,6 +52,7 @@ function mount(vnode, container) {
 
 // compare vnode
 function patch(n1, n2) {
+  console.log('---', n1, n2);
   // 1. different tag
   if (n1.tag !== n2.tag) {
     const n1ElParent = n1.el.parentElement;
@@ -57,6 +63,7 @@ function patch(n1, n2) {
     // 2.1 resolve props
 
     const el = (n2.el = n1.el);
+    console.log(el);
     const oldProps = n1.props || {};
     const newProps = n2.props || {};
 

@@ -1,0 +1,52 @@
+<!--
+ * @Version    : v1.00
+ * @Author     : itchaox
+ * @Date       : 2023-07-15 13:14
+ * @LastAuthor : itchaox
+ * @LastTime   : 2023-07-15 14:32
+ * @desc       : 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="./index.js"></script>
+    <script src="./reactive.js"></script>
+    <script src="./renderer.js"></script>
+
+    <script>
+      // 1. 创建根组件
+      const App = {
+        data: reactive({ number: 99 }),
+        render() {
+          return h('div', null, [
+            h('h1', null, `number: ${this.data.number}`),
+            h(
+              'button',
+              {
+                //FIXME: 事件绑定不成功
+                onClick: () => {
+                  this.data.number++;
+                },
+              },
+              '+1',
+            ),
+          ]);
+        },
+      };
+
+      // 2. 挂载根组件
+      const app = createApp(App);
+      app.mount('#app');
+    </script>
+  </body>
+</html>
